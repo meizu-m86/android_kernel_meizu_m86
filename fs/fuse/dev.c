@@ -1872,10 +1872,10 @@ static ssize_t fuse_dev_do_write(struct fuse_conn *fc,
 	spin_unlock(&fc->lock);
 
 	err = copy_out_args(cs, &req->out, nbytes);
-        if (req->in.h.opcode == FUSE_CANONICAL_PATH) {
-               req->out.h.error = kern_path((char *)req->out.args[0].value, 0,
-                                                       req->canonical_path);
-       }
+	if (req->in.h.opcode == FUSE_CANONICAL_PATH) {
+		req->out.h.error = kern_path((char *)req->out.args[0].value, 0,
+							req->canonical_path);
+	}
 	fuse_copy_finish(cs);
 
 	spin_lock(&fc->lock);
