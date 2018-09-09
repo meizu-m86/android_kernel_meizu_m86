@@ -168,3 +168,6 @@ obj-$(CONFIG_GATOR)		+= gator/
 obj-$(CONFIG_EXYNOS_BTS)	+= bts/
 #motor driver
 obj-$(CONFIG_TSPDRV)	+= tspdrv/
+
+# Android non-staging drivers
+obj-$(CONFIG_ANDROID)	+= android/

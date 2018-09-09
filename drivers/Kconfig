@@ -181,4 +181,6 @@ source "drivers/trace/Kconfig"
 source "drivers/bts/Kconfig"
 
 source "drivers/tspdrv/Kconfig"
+
+source "drivers/android/Kconfig"
 endmenu
