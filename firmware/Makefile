@@ -146,11 +146,6 @@ $(warning '$(TSPFIRMWARE_DIRECTORY)' directory dose not exist)
 endif
 
 TSPFIRMWARE_DIRECTORY = $(srctree)/firmware/tsp_synaptics
-ifeq ($(shell test -d $(TSPFIRMWARE_DIRECTORY) && echo yes),yes)
-fw-shipped-$(CONFIG_TOUCHSCREEN_FTS) += tsp_stm/stm_s.fw tsp_stm/stm_t.fw tsp_stm/stm_tb.fw tsp_stm/stm_tb_integ.fw
-else
-$(warning '$(TSPFIRMWARE_DIRECTORY)' directory dose not exist)
-endif
 
 fw-shipped-all := $(fw-shipped-y) $(fw-shipped-m) $(fw-shipped-)
 
