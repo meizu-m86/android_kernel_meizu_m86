@@ -21,10 +21,9 @@ $(PREBUILT_KERNEL_IMAGE): $(UBUNTU_OUT)
 	make CROSS_COMPILE="$(TURBO_CROSS_COMPILE)" O=$(UBUNTU_OUT) CFLAGS_MODULE="-fno-pic" ARCH=arm64 Image -j$(CPUS)
 
 $(UBUNTU_INITRD): $(UBUNTU_OUT)
-	dpkg -x prebuilts/initrd/$(CORE_NAME)/armhf/* $(UBUNTU_OUT); \
-	cp $(UBUNTU_OUT)/usr/lib/ubuntu-touch-generic-initrd/initrd.img-touch $(UBUNTU_OUT); \
+	cp prebuilts/initrd/initrd.img-touch-arm64 $(UBUNTU_OUT)/initrd.img-touch; \
 
 PHONY += bootimage
 bootimage: $(PREBUILT_KERNEL_IMAGE) $(UBUNTU_INITRD)
-	$(MKIMG) --kernel $(PREBUILT_KERNEL_IMAGE) --ramdisk $(UBUNTU_INITRD) --cmdline "console=ttyFIQ2,115200n8 no_console_suspend systempart=/dev/disk/by-partlabel/system datapart=/dev/disk/by-partlabel/userdata" --base 0x40000000 --pagesize 4096 --kernel_offset 0x80000 --ramdisk_offset 0x2000000 --output $(UBUNTU_BOOTIMG)
+	$(MKIMG) --kernel $(PREBUILT_KERNEL_IMAGE) --ramdisk $(UBUNTU_INITRD) --cmdline "console=ttyFIQ2,115200n8 androidboot.console=ttyMSM0 androidboot.hardware=m86 earlycon=exynos4210,0x14c20000 console=tty0" --base 0x40000000 --pagesize 4096 --kernel_offset 0x80000 --ramdisk_offset 0x2000000 --output $(UBUNTU_BOOTIMG)
 
