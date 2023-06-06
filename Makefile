@@ -379,7 +379,7 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -fno-strict-aliasing -fno-common \
 		   -Werror-implicit-function-declaration \
 		   -Wno-format-security \
-		   -fno-delete-null-pointer-checks \
+		   -fno-delete-null-pointer-checks  -Wno-maybe-uninitialized \
 		   -fdiagnostics-show-option -Werror \
                    -march=armv8-a+crc \
                    -mtune=cortex-a57.cortex-a53
@@ -759,7 +759,7 @@ vmlinux-alldirs	:= $(sort $(vmlinux-dirs) $(patsubst %/,%,$(filter %/, \
 		     $(net-n)  $(net-)  $(libs-n)    $(libs-) \
 		     $(backports-n) $(backports-))))
 
-backports-y 	:= $(patsubst $/, $/built-in.o, $(backports-y))
+backports-y 	:= $(patsubst %/, %/built-in.o, $(backports-y))
 init-y		:= $(patsubst %/, %/built-in.o, $(init-y))
 core-y		:= $(patsubst %/, %/built-in.o, $(core-y))
 drivers-y	:= $(patsubst %/, %/built-in.o, $(drivers-y))
@@ -770,7 +770,7 @@ libs-y		:= $(libs-y1) $(libs-y2)
 
 # Externally visible symbols (used by link-vmlinux.sh)
 export KBUILD_VMLINUX_INIT := $(head-y) $(init-y)
-export KBUILD_VMLINUX_MAIN := $(core-y) $(libs-y) $(drivers-y) $(net-y)
+export KBUILD_VMLINUX_MAIN := $(core-y) $(libs-y) $(drivers-y) $(net-y) $(backports-y)
 export KBUILD_LDS          := arch/$(SRCARCH)/kernel/vmlinux.lds
 export LDFLAGS_vmlinux
 # used by scripts/pacmage/Makefile
