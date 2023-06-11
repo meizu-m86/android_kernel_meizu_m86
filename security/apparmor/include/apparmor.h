@@ -18,6 +18,7 @@
 #include <linux/slab.h>
 #include <linux/fs.h>
 
+#include "backport.h"
 #include "match.h"
 
 /* Provide our own test for whether a write lock is held for asserts
@@ -136,9 +137,9 @@ static inline unsigned int aa_dfa_null_transition(struct aa_dfa *dfa,
 	return aa_dfa_next(dfa, start, 0);
 }
 
-static inline bool path_mediated_fs(struct dentry *dentry)
+static inline bool path_mediated_fs(struct inode *inode)
 {
-	return !(dentry->d_sb->s_flags & MS_NOUSER);
+	return !(inode->i_sb->s_flags & MS_NOUSER);
 }
 
 

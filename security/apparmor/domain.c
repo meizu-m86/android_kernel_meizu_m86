@@ -19,6 +19,7 @@
 #include <linux/syscalls.h>
 #include <linux/tracehook.h>
 #include <linux/personality.h>
+#include <linux/sched.h>
 
 #include "include/audit.h"
 #include "include/apparmorfs.h"
