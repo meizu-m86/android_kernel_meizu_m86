@@ -338,5 +338,11 @@ config BACKPORT_BT_HCISMD
 	  kernel or say M to compile it as module (hci_smd).
 
 
+config BACKPORT_BT_BCM43241
+	bool "Enable BCM43241 driver"
+	default n
+	help
+	  Adds BCM43241 RFKILL driver for Broadcom BCM43241 chipset for exynos74xx.
+	  default is n.
 
 endmenu
